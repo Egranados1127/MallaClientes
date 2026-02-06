@@ -1,2 +1,1648 @@
-<!-- Malla de clientes profesional -->
-<!-- ...código existente... -->
+
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<title>Malla de Segmentación de Clientes</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 40px; }
+h1 { color: #2a4d7a; }
+.kpis { background: #f0f4fa; padding: 10px 20px; margin-bottom: 20px; border-radius: 8px; }
+.tabla-clientes { border-collapse: collapse; width: 100%; margin-top: 20px; }
+.tabla-clientes th, .tabla-clientes td { border: 1px solid #ccc; padding: 8px 12px; }
+.tabla-clientes th { background: #e3eaf6; }
+tr:nth-child(even) { background: #f9f9f9; }
+.filtros { margin: 20px 0; }
+</style>
+</head>
+<body>
+<h1>Malla de Segmentación de Clientes</h1>
+<p><b>Objetivos del proyecto:</b></p>
+<ul><li>Segmentar clientes según importancia y ubicación.</li><li>Visualizar clusters y cartera.</li><li>Permitir análisis y toma de decisiones.</li></ul>
+<div class='kpis'><b>Total clientes:</b> 5345<br><b>CRECIMIENTO:</b> 1<br><b>DECLIVE:</b> 46<br><b>MADUREZ:</b> 29<br><b>OPORTUNIDAD:</b> 24</div>
+<div class='filtros'><b>Filtros (simulados):</b> Por cluster, cartera, ciudad, vendedor...</div>
+<table class="dataframe tabla-clientes">
+  <thead>
+    <tr style="text-align: right;">
+      <th>NIT</th>
+      <th>NOMBRE RUT</th>
+      <th>NOMBRE COMERCIAL</th>
+      <th>DEPARTAMENTO</th>
+      <th>CIUDAD</th>
+      <th>Nombre contacto compras</th>
+      <th>dirección cartera</th>
+      <th>cupo</th>
+      <th>Vendedor</th>
+      <th>Edad</th>
+      <th>Clasificación</th>
+      <th>Calificación Cartera</th>
+      <th>Rutero</th>
+      <th>Clasificación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1000417028</td>
+      <td>ALVAREZ CORTES ANDRES FELIPE</td>
+      <td>ALVAREZ CORTES ANDRES FELIPE(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CALLE 44 92 125</td>
+      <td>9000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Centro</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1005584074</td>
+      <td>ARRIETA PALENCIA BRYAN GABRIEL</td>
+      <td>FERRETERIA EL PRADO ARRIETA</td>
+      <td>Sucre</td>
+      <td>Los Palmitos</td>
+      <td>NaN</td>
+      <td>TV 14 CL 12 15</td>
+      <td>2500000.0</td>
+      <td>GONZALEZ BONILLA RONBIN STIC</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>B</td>
+      <td>Cordoba</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1007441994</td>
+      <td>GARCIA CHAVARRIA DIEGO HERNANDO</td>
+      <td>GARCIA CHAVARRIA DIEGO HERNANDO(P))</td>
+      <td>Antioquia</td>
+      <td>Puerto Triunfo</td>
+      <td>NaN</td>
+      <td>CL 21 21 42</td>
+      <td>3000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Autopista</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1017128099</td>
+      <td>VALENCIA ZAPATA EDUARDO</td>
+      <td>BASTION FERRETERIA</td>
+      <td>Antioquia</td>
+      <td>La Ceja</td>
+      <td>NaN</td>
+      <td>CR 19 9 73</td>
+      <td>5000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Oriente</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1017146016</td>
+      <td>ORTIZ AMAYA JHON FREDY</td>
+      <td>ORTIZ AMAYA JHON FREDY(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>fredy</td>
+      <td>CR 130 63 15 SAN CRISTOBAL</td>
+      <td>3000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>X</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1017158299</td>
+      <td>TANGARIFE CALLEJAS WENDI YULIETH</td>
+      <td>FERRELECTRICOS TANGARIFE</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Wendi tangarife</td>
+      <td>CL 30  77 5</td>
+      <td>20000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1017221267</td>
+      <td>ARTEAGA GUTIERREZ NATHALIA</td>
+      <td>ARTEAGA GUTIERREZ NATHALIA(P))</td>
+      <td>Antioquia</td>
+      <td>Puerto Triunfo</td>
+      <td>NaN</td>
+      <td>CL 20 21 53 CRR DORADAL</td>
+      <td>8000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>B</td>
+      <td>Autopista</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1017228448</td>
+      <td>JARAMILLO GONZALEZ ANTONIO</td>
+      <td>JARAMILLO GONZALEZ ANTONIO(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>antonio</td>
+      <td>CRA 53 A 82 A 84</td>
+      <td>2500000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1022036504</td>
+      <td>PEREZ FERNANDEZ ANA MARIA</td>
+      <td>FERRESOLUCIONES LA AMERICA</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 82 44B 28</td>
+      <td>6000000.0</td>
+      <td>SIN ASIGNAR</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1027946785</td>
+      <td>ROMERO PEREZ EDER WILLIAM</td>
+      <td>FERRELECTRICO RYJ NUEVA COLONIA</td>
+      <td>Antioquia</td>
+      <td>Turbo</td>
+      <td>NaN</td>
+      <td>CL PRINCIPAL CENTRO CORR NUEVA COLONIA</td>
+      <td>0.0</td>
+      <td>RIVERA MELENDRES JEISON DANIEL</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Urabá</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1035223903</td>
+      <td>CORTES VIVAREZ ISABEL CRISTINA</td>
+      <td>PINTAARTE</td>
+      <td>Antioquia</td>
+      <td>Barbosa</td>
+      <td>Isabel Cristina</td>
+      <td>CR 17 11 11</td>
+      <td>5000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>C</td>
+      <td>Norte</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1035430979</td>
+      <td>CORDOBA VILLA GIOVANY</td>
+      <td>CORDOBA VILLA GIOVANY</td>
+      <td>Antioquia</td>
+      <td>Copacabana</td>
+      <td>Giovanny cordoba</td>
+      <td>CR 51 48A 33</td>
+      <td>4000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Centro-norte</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1035851768</td>
+      <td>HENAO VALENCIA LORENA</td>
+      <td>HENAO VALENCIA LORENA(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 55 76 69 BG 105</td>
+      <td>0.0</td>
+      <td>CALL CENTER</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Call center</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1035916422</td>
+      <td>CORRALES LOPEZ ALEJANDRA</td>
+      <td>CORRALES LOPEZ ALEJANDRA(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 99 47 E 11</td>
+      <td>3000000.0</td>
+      <td>CALL CENTER</td>
+      <td>ANTIGUO</td>
+      <td>X</td>
+      <td>B</td>
+      <td>Call center</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1036220498</td>
+      <td>COSME CASTRILLON MAICOL ANDRES</td>
+      <td>AUTOSERVICIO RIO CLARO</td>
+      <td>Antioquia</td>
+      <td>Puerto Triunfo</td>
+      <td>NaN</td>
+      <td>VRD RIO CLARO KM 99 900 DORADAL</td>
+      <td>10000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Autopista</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1036599502</td>
+      <td>BOTERO VELEZ DANIEL</td>
+      <td>FERRETERÍA LA AURORA</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Daniel velez</td>
+      <td>CL 44 70 100</td>
+      <td>2000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1036613287</td>
+      <td>BRAND URREGO HERNAN DE JESUS</td>
+      <td>BRAND URREGO HERNAN DE JESUS(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 72 A 95 44</td>
+      <td>2500000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1036614233</td>
+      <td>SALAZAR FRANCO ESTEBAN</td>
+      <td>MISCELANEA SANTA FE</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 20 54 78 LC 2</td>
+      <td>0.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>X</td>
+      <td>C</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1036615881</td>
+      <td>HERRERA VALENCIA LUIS ADRIAN</td>
+      <td>HERRERA VALENCIA LUIS ADRIAN(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 50 E SUR 72 3</td>
+      <td>0.0</td>
+      <td>CALL CENTER</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>C</td>
+      <td>Call center</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1036643451</td>
+      <td>SALAZAR FLOREZ LEONY RICHARD</td>
+      <td>SALAZAR FLOREZ LEONY RICHARD(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 91 50 05</td>
+      <td>5000000.0</td>
+      <td>CALL CENTER</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Call center</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1036661753</td>
+      <td>CARDONA AGUIRRE MARIA ALEJANDRA</td>
+      <td>CA FERRECONSTRUCCIONES Y MAS</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 29 44 04</td>
+      <td>4000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Call center</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15329781</td>
+      <td>GUTIERREZ LOPEZ EDWIN JAMES</td>
+      <td>GUTIERREZ LOPEZ EDWIN JAMES(P))</td>
+      <td>Antioquia</td>
+      <td>Angostura</td>
+      <td>NaN</td>
+      <td>CR9 9 04</td>
+      <td>5000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>B</td>
+      <td>Lechera</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1037948976</td>
+      <td>MEJIA GIRALDO JUAN GUILLERMO</td>
+      <td>ELÉCTRICOS GUILLERMO</td>
+      <td>Antioquia</td>
+      <td>San Carlos</td>
+      <td>Guillermo mejia</td>
+      <td>CL 21 21 14</td>
+      <td>18000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Embalses</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1038099654</td>
+      <td>ALVAREZ TOBON NILSON JAVIER</td>
+      <td>ALVAREZ TOBON NILSON JAVIER(P))</td>
+      <td>Antioquia</td>
+      <td>Caucasia</td>
+      <td>NaN</td>
+      <td>CR 1 21 53</td>
+      <td>7000001.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Bajo Cauca</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1038336587</td>
+      <td>BRAN MORENO JOHANA DE JESUS</td>
+      <td>BRAN MORENO JOHANA DE JESUS(P))</td>
+      <td>Antioquia</td>
+      <td>Frontino</td>
+      <td>NaN</td>
+      <td>CR 36 16 53</td>
+      <td>10000000.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Occidente</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1038407426</td>
+      <td>MONTOYA RICAURTE JUAN PABLO</td>
+      <td>LA FERRETE</td>
+      <td>Antioquia</td>
+      <td>Marinilla</td>
+      <td>Juan pablo</td>
+      <td>CL 31 28 04</td>
+      <td>10000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Oriente</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1039102836</td>
+      <td>NARVAEZ CARDONA NANDO CESAR</td>
+      <td>DEPOSITO Y FERRETERIA NECOCLI</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 40 A 47 SUR 49</td>
+      <td>3000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>A</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1039680684</td>
+      <td>GOMEZ ARCHILA LEON GABRIEL</td>
+      <td>GOMEZ ARCHILA LEON GABRIEL(P))</td>
+      <td>Boyacá</td>
+      <td>Puerto Boyacá</td>
+      <td>NaN</td>
+      <td>CL 14 2 23</td>
+      <td>17000001.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>C</td>
+      <td>Autopista</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1040036655</td>
+      <td>BEDOYA LOPEZ SANTIAGO</td>
+      <td>FERRETERÍA MEGA HERRAMIENTAS</td>
+      <td>Antioquia</td>
+      <td>La Unión</td>
+      <td>Claudia</td>
+      <td>CL 12  07  63</td>
+      <td>8000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>Oriente</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1040182470</td>
+      <td>CEBALLOS BOTERO RICARDO ANDRES</td>
+      <td>FERRETERÍA RICARDO</td>
+      <td>Antioquia</td>
+      <td>Retiro</td>
+      <td>Ricardo Andres</td>
+      <td>KM 15 VIA PALMAS VDA CARRIZALES</td>
+      <td>15000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>Oriente</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1040183335</td>
+      <td>OSPINA LONDONO DANGELLY YADIANY</td>
+      <td>OSPINA LONDONO DANGELLY YADIANY(P))</td>
+      <td>Antioquia</td>
+      <td>San Rafael</td>
+      <td>Hillary</td>
+      <td>CL 19 21 20</td>
+      <td>2000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Embalses</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1040732489</td>
+      <td>GARCIA VASQUEZ CRISTIAN ALEJANDRO</td>
+      <td>TOOL BOX 74\t</td>
+      <td>Antioquia</td>
+      <td>La Estrella</td>
+      <td>David Gallego Agudelo\t</td>
+      <td>CL 74 SUR 60 75</td>
+      <td>5000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Sur</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1045024822</td>
+      <td>PEREZ QUINTERO LEIDER DAVID</td>
+      <td>Ferretera WILDOR</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>Carrera 101 41 19</td>
+      <td>7000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>C</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1045049292</td>
+      <td>CARDONA TORO ERIKA NATALI</td>
+      <td>FERRETERIA LA PLAYA BLANCA</td>
+      <td>Antioquia</td>
+      <td>Támesis</td>
+      <td>NaN</td>
+      <td>CL 12 10 62</td>
+      <td>2000000.0</td>
+      <td>MEJIA GARRO EDWIN ANDRES</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>C</td>
+      <td>Suroeste</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1054564849</td>
+      <td>GUILLEN ARANGO MAROLIN LIZETH</td>
+      <td>GUILLEN ARANGO MAROLIN LIZETH(P))</td>
+      <td>Caldas</td>
+      <td>La Dorada</td>
+      <td>NaN</td>
+      <td>CR 6 11 09</td>
+      <td>5000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Eje cafetero</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1055834597</td>
+      <td>VALENCIA WILMAR FERNANDO</td>
+      <td>PUNTO ELECTRICO</td>
+      <td>Caldas</td>
+      <td>Aguadas</td>
+      <td>NaN</td>
+      <td>CL 6 7 20</td>
+      <td>15000000.0</td>
+      <td>RENGIFO SANABRIA JAVIER GUSTAVO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Eje cafetero</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1059710886</td>
+      <td>CRUZ LADINO FEDERICO</td>
+      <td>ELECTRICOS LA PALOMERA</td>
+      <td>Caldas</td>
+      <td>Riosucio</td>
+      <td>Federico</td>
+      <td>CL 10 7  31 LC 2</td>
+      <td>3000000.0</td>
+      <td>RENGIFO SANABRIA JAVIER GUSTAVO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Eje cafetero</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1063146413</td>
+      <td>MONTERROSA AVILA WILSON MANUEL</td>
+      <td>ELECTRICOS SOL Y LUNA</td>
+      <td>Sucre</td>
+      <td>COVEÑAS</td>
+      <td>NaN</td>
+      <td>CL 4 4 60 SECTOR LA COQUERITA</td>
+      <td>5000000.0</td>
+      <td>SIN ASIGNAR</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Cordoba</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1073673381</td>
+      <td>GARZON SANCHEZ LEIDY VIVIANA</td>
+      <td>FERROSANJUAN</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Leidy garzon</td>
+      <td>CL 44 90 09</td>
+      <td>5000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1077428790</td>
+      <td>CANO GALLEGO ALEXANDER</td>
+      <td>CANO GALLEGO ALEXANDER(P))</td>
+      <td>Chocó</td>
+      <td>Quibdó</td>
+      <td>NaN</td>
+      <td>CL 25 4 65</td>
+      <td>10000000.0</td>
+      <td>MOSQUERA PALACIOS ROBINSON</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Chocó</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1116257492</td>
+      <td>HERNANDEZ NORENA JEAN ALEJANDRO</td>
+      <td>FERRETULUA\t</td>
+      <td>Antioquia</td>
+      <td>Itagüí</td>
+      <td>HERNANDEZ NORENA JEAN ALEJANDRO\t</td>
+      <td>CL 76 50 12 EL CARMELO</td>
+      <td>10000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Sur</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>1128282247</td>
+      <td>MARULANDA GIRALDO JOHANNA PATRICIA</td>
+      <td>MARULANDA GIRALDO JOHANNA PATRICIA(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 1 82 228</td>
+      <td>10000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Centro</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1128430243</td>
+      <td>MADRIGAL DUQUE JOHANA MARCELA</td>
+      <td>FERRETERÍA METROCABLE</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Johana madrigal</td>
+      <td>CL 106A 32 83</td>
+      <td>8000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1129485999</td>
+      <td>FONSECA JIMENEZ ROSA MARIA</td>
+      <td>FERRETERIA CALLE COLOMBIA</td>
+      <td>Antioquia</td>
+      <td>San Luis</td>
+      <td>NaN</td>
+      <td>CRA 21 21 04</td>
+      <td>13500001.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>C</td>
+      <td>Autopista</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1140414534</td>
+      <td>ORDUZ ALVAREZ MARIA EUGENIA</td>
+      <td>FERRIPUNTO</td>
+      <td>Antioquia</td>
+      <td>Envigado</td>
+      <td>NaN</td>
+      <td>CL 40 SUR 28B 13</td>
+      <td>1000000.0</td>
+      <td>SIN ASIGNAR</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Sur</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>1193532955</td>
+      <td>BARRERA OCHOA ESTEBAN</td>
+      <td>LA TIENDA DEL PINTOR</td>
+      <td>Antioquia</td>
+      <td>Amalfi</td>
+      <td>ESTEBAN</td>
+      <td>CL 19 19 85</td>
+      <td>20000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Oriente-autopista</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>1214715908</td>
+      <td>OCHOA RESTREPO MARIA ALEJANDRA</td>
+      <td>DURAFULL</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>alejandra</td>
+      <td>CALLE 67 C 151 26 VD RETORNO EL UVITO</td>
+      <td>10000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>12230983</td>
+      <td>CASTRO CALDERON GERARDO</td>
+      <td>ELECTRICOS EL APAGON</td>
+      <td>Huila</td>
+      <td>Pitalito</td>
+      <td>NaN</td>
+      <td>CR 6 3 70</td>
+      <td>15000000.0</td>
+      <td>SIN ASIGNAR</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>B</td>
+      <td>Otros</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>14996509</td>
+      <td>GOMEZ GOMEZ LUIS CARLOS</td>
+      <td>FERRETERÍA PLAYA BLANCA</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Juan gomez</td>
+      <td>CR 90 44 10</td>
+      <td>10000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15047741</td>
+      <td>CARRASCAL BARON LUIS FERNANDO</td>
+      <td>ELECTROREPUESTOS SAHAGUN</td>
+      <td>Córdoba</td>
+      <td>Sahagún</td>
+      <td>Diego Carrascal</td>
+      <td>CR 11 11 31</td>
+      <td>3000000.0</td>
+      <td>GONZALEZ BONILLA RONBIN STIC</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>C</td>
+      <td>Cordoba</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15257957</td>
+      <td>MARTINEZ GONZALEZ CARLOS ALBERTO</td>
+      <td>FERRETERIA MANDALAY</td>
+      <td>Antioquia</td>
+      <td>Caldas</td>
+      <td>Magda</td>
+      <td>CR 50  138 SUR 187</td>
+      <td>2500000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Sur</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>98467404</td>
+      <td>SANCHEZ PENA ARGIRO DE JESUS</td>
+      <td>SERVICIO ARGIMAR</td>
+      <td>Antioquia</td>
+      <td>Angostura</td>
+      <td>NaN</td>
+      <td>CR 9 9 84</td>
+      <td>2000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Lechera</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>98469012</td>
+      <td>OSORIO ALVAREZ MEDARDO ALFONSO</td>
+      <td>FERRETERIA EL JINETE</td>
+      <td>Antioquia</td>
+      <td>Angostura</td>
+      <td>NaN</td>
+      <td>CL 10 8 A 66</td>
+      <td>10000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Lechera</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15327161</td>
+      <td>RODRIGUEZ UNATES DENNIS</td>
+      <td>RODRIGUEZ UNATES DENNIS(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 102A  83  15</td>
+      <td>0.0</td>
+      <td>RODRIGUEZ UNATES DENNIS</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>construcción</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>71451597</td>
+      <td>DELGADO VELEZ OSCAR</td>
+      <td>DELGADO VELEZ OSCAR(P))</td>
+      <td>Antioquia</td>
+      <td>Angostura</td>
+      <td>NaN</td>
+      <td>CR 10 10 25</td>
+      <td>0.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>X</td>
+      <td>B</td>
+      <td>Lechera</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15342151</td>
+      <td>ZAPATA LOPEZ JAILER HERNAN</td>
+      <td>ALMACEN SOLLA DE JAILER</td>
+      <td>Antioquia</td>
+      <td>Remedios</td>
+      <td>NaN</td>
+      <td>CL REAL 11 45</td>
+      <td>10000001.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Minera</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15353527</td>
+      <td>VARGAS CARDONA CARLOS OLMEDO</td>
+      <td>DEPOSITO DE MATERIALES Y FERRETERIA FERROCARMEN</td>
+      <td>Antioquia</td>
+      <td>El Carmen De Viboral</td>
+      <td>Juan Alberto</td>
+      <td>CR 31 CL 25 84</td>
+      <td>5000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Oriente</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>15378042</td>
+      <td>OSORIO HENAO SIGIFREDO DE JESUS</td>
+      <td>MATERIALES CONSTRUCENTRO</td>
+      <td>Antioquia</td>
+      <td>La Ceja</td>
+      <td>NaN</td>
+      <td>CL 19  22 61</td>
+      <td>6000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>B</td>
+      <td>Oriente</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15401768</td>
+      <td>AGUINAGA SALAZAR JOSE IGNACIO</td>
+      <td>DEPOSITO LA INSTANTANEA</td>
+      <td>Antioquia</td>
+      <td>Santa Fé De Antioquia</td>
+      <td>NaN</td>
+      <td>CR 13 POR LA VARIANTE</td>
+      <td>10000000.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>B</td>
+      <td>Occidente</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15404612</td>
+      <td>OSPINA MENA LUIS CARLOS</td>
+      <td>OSPINA LUIS CARLOS</td>
+      <td>Antioquia</td>
+      <td>Santa Fé De Antioquia</td>
+      <td>NaN</td>
+      <td>CL 13 7 150 LA VARIANTE</td>
+      <td>20000000.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Occidente</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15430711</td>
+      <td>VELASQUEZ MUNERA GERMAN</td>
+      <td>FERRETERIA LA POLA</td>
+      <td>Antioquia</td>
+      <td>Rionegro</td>
+      <td>Yeimer Velasquez</td>
+      <td>CR 46  49 04</td>
+      <td>10000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>B</td>
+      <td>Oriente</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15437222</td>
+      <td>HENAO CARDONA JUAN GUILLERMO</td>
+      <td>AGROFERRETERIA LA TORRE</td>
+      <td>Antioquia</td>
+      <td>El Carmen De Viboral</td>
+      <td>Juan Guillermo</td>
+      <td>CR 31 17 03 LC 102</td>
+      <td>10000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Oriente</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>15442338</td>
+      <td>ALZATE MARIN EDWIN FERNEY</td>
+      <td>LUBRIMAS TR</td>
+      <td>Antioquia</td>
+      <td>Guarne</td>
+      <td>NaN</td>
+      <td>CL 51  49 46</td>
+      <td>13000000.0</td>
+      <td>VASQUEZ RAMIREZ SANDRA PATRICIA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>A</td>
+      <td>Oriente</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15505649</td>
+      <td>HERNANDEZ NARVAEZ ADOLFO ENRIQUE</td>
+      <td>HERNANDEZ NARVAEZ ADOLFO ENRIQUE(P))</td>
+      <td>Antioquia</td>
+      <td>Copacabana</td>
+      <td>NaN</td>
+      <td>CALLE 47  63   100</td>
+      <td>10000000.0</td>
+      <td>RODRIGUEZ UNATES DENNIS</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>construcción</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15507786</td>
+      <td>GARCIA HENAO JUAN EDUARDO</td>
+      <td>GARCIA HENAO JUAN EDUARDO(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 43 D D 9 32</td>
+      <td>5000000.0</td>
+      <td>RODRIGUEZ UNATES DENNIS</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>construcción</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>15510359</td>
+      <td>JARAMILLO ZAPATA ARIEL NEVARDO</td>
+      <td>FERRETERÍA JAZA</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Ariel Jaramillo</td>
+      <td>CL 44 101 82</td>
+      <td>23000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Centro</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>15515938</td>
+      <td>VALENCIA RAMIREZ JUAN CARLOS</td>
+      <td>VALENCIA RAMIREZ JUAN CARLOS(P))</td>
+      <td>Antioquia</td>
+      <td>Copacabana</td>
+      <td>NaN</td>
+      <td>CR 63 47 A 23</td>
+      <td>0.0</td>
+      <td>VELEZ GOMEZ JUAN SEBASTIAN</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>C</td>
+      <td>construcción</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15529297</td>
+      <td>BERMUDEZ RUBIEL</td>
+      <td>BERMUDEZ RUBIEL(P))</td>
+      <td>Antioquia</td>
+      <td>Itagüí</td>
+      <td>NaN</td>
+      <td>CL 88 49 45</td>
+      <td>10000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>A</td>
+      <td>Sur</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15534566</td>
+      <td>POSADA ELORZA JULIO ANDRES</td>
+      <td>TIENDA DEL GRANJERO</td>
+      <td>Antioquia</td>
+      <td>Andes</td>
+      <td>JULIO</td>
+      <td>CR 52 50 41 INT 101</td>
+      <td>5000001.0</td>
+      <td>MEJIA GARRO EDWIN ANDRES</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Suroeste</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>15538805</td>
+      <td>VAHOS OSORNO WALTER ALONSO</td>
+      <td>VAHOS OSORNO WALTER ALONSO(P))</td>
+      <td>Antioquia</td>
+      <td>Buriticá</td>
+      <td>NaN</td>
+      <td>VRD SECTOR SAN ANTONIO BURITICA</td>
+      <td>10000010.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Occidente</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>15926278</td>
+      <td>OTALVARO MORENO WILLIAM HEYBER</td>
+      <td>OTALVARO MORENO WILLIAM HEYBER(P))</td>
+      <td>Caldas</td>
+      <td>Supía</td>
+      <td>William</td>
+      <td>CR 8 29 10</td>
+      <td>10000000.0</td>
+      <td>RENGIFO SANABRIA JAVIER GUSTAVO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Eje cafetero</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>15929963</td>
+      <td>MELLAN GIL JORGE ALEJANDRO</td>
+      <td>MERCAELECTRICOS SUPIA</td>
+      <td>Caldas</td>
+      <td>Supía</td>
+      <td>Alejandro</td>
+      <td>CR 7 34 34</td>
+      <td>2500000.0</td>
+      <td>RENGIFO SANABRIA JAVIER GUSTAVO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Eje cafetero</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>15956947</td>
+      <td>TRUJILLO MURILLO CARLOS ARTURO</td>
+      <td>ALMACEN Y FERRETERIA PINTUPACORA</td>
+      <td>Caldas</td>
+      <td>Pácora</td>
+      <td>Jesus</td>
+      <td>CR 4 4 43 PARQUE PPAL DE PACORA</td>
+      <td>16000000.0</td>
+      <td>RENGIFO SANABRIA JAVIER GUSTAVO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Eje cafetero</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>21368108</td>
+      <td>ECHEVERRI DETORO FLOR MARIA</td>
+      <td>DEPOSITO MARINO TORO</td>
+      <td>Antioquia</td>
+      <td>Bello</td>
+      <td>NaN</td>
+      <td>CR 72   20E 23</td>
+      <td>3000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Norte</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>21418982</td>
+      <td>GARCIA RINCON GLORIA AMPARO</td>
+      <td>DEPOSITO DE MATERIALES EL BACAN</td>
+      <td>Antioquia</td>
+      <td>Abejorral</td>
+      <td>Amparo garcia</td>
+      <td>CL 50 53 40</td>
+      <td>10000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Embalses</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>21524196</td>
+      <td>CARDENAS DE MORENO ALIRIA ISABEL</td>
+      <td>DEPOSITO LOS ACUARIOS</td>
+      <td>Antioquia</td>
+      <td>Itagüí</td>
+      <td>ALEJANDRO MORENO</td>
+      <td>CL 72 50 71 EL CARMELO</td>
+      <td>5000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Sur</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>21632026</td>
+      <td>MEJIA ORREGO GLORIA MARIA</td>
+      <td>FERROELECTRICOS</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Gloria Mejía</td>
+      <td>CL 43 100 18</td>
+      <td>16000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>A</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>21788609</td>
+      <td>CASTANO RINCON GLORIA CECILIA</td>
+      <td>TRANSFORMANDO FERRETERIA Y ELECTRICOS</td>
+      <td>Antioquia</td>
+      <td>Bello</td>
+      <td>NaN</td>
+      <td>CL 49 52 28</td>
+      <td>7000000.0</td>
+      <td>SIN ASIGNAR</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>Norte</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>21830778</td>
+      <td>OSPINA DE SANTAMARIA DOLLY DEL SOCORRO</td>
+      <td>FERRETERIA Y MULTISERVICIO PRISA</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 49 20B 7</td>
+      <td>5000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>BS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>21832817</td>
+      <td>MONCADA CARDONA GLORIA CECILIA</td>
+      <td>DEPOSITO Y FERRETERIA CABALLO BLANCO</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>gloria</td>
+      <td>CL 66 C 39 58</td>
+      <td>2000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>X</td>
+      <td>A</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>21970424</td>
+      <td>MAZO AREIZA CLAUDIA MARCELA</td>
+      <td>FERRO VARIEDADES LA BENDICION</td>
+      <td>Antioquia</td>
+      <td>Buriticá</td>
+      <td>NaN</td>
+      <td>CL 4 7 19</td>
+      <td>9000000.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Occidente</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>21982525</td>
+      <td>PALACIO MARIA CRISTINA</td>
+      <td>PALACIO MARIA CRISTINA(P))</td>
+      <td>Antioquia</td>
+      <td>Caldas</td>
+      <td>NaN</td>
+      <td>CR 50 CLL 107 SUR 02 INT 176</td>
+      <td>0.0</td>
+      <td>FERRETEROS Y ELECTRICOS S.A.S.</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Sur</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>21990890</td>
+      <td>CORREA CORREA MARIA ELENA</td>
+      <td>CORREA CORREA MARIA ELENA(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CL 32 32 06</td>
+      <td>5000000.0</td>
+      <td>ABOGADOS COSMOPOLITAN BPO SAS</td>
+      <td>ANTIGUO</td>
+      <td>CS</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>22019682</td>
+      <td>GUARIN EDILMA</td>
+      <td>DEPOSITO FERREDIAL</td>
+      <td>Antioquia</td>
+      <td>Amalfi</td>
+      <td>EDILMA</td>
+      <td>CL  BOLIVAR   19 20</td>
+      <td>10000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Oriente-autopista</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>22020116</td>
+      <td>QUINCHIA DE TORRES MARIA CECILIA</td>
+      <td>QUINCHIA DE TORRES MARIA CECILIA(P))</td>
+      <td>Antioquia</td>
+      <td>San Rafael</td>
+      <td>Samuel</td>
+      <td>CL 2129 24</td>
+      <td>5000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Embalses</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>22105234</td>
+      <td>GIRALDO HENAO MARIA DOLLY</td>
+      <td>FERRETERIA LA PLAZUELA SONSON</td>
+      <td>Antioquia</td>
+      <td>Sonsón</td>
+      <td>Dolly giraldo</td>
+      <td>CL 12 6 35</td>
+      <td>15000000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>A</td>
+      <td>Embalses</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>22116455</td>
+      <td>PULGARIN MONSALVE MARIA RUBIELA</td>
+      <td>DEPOSITO SOPETRAN</td>
+      <td>Antioquia</td>
+      <td>Sopetrán</td>
+      <td>PULGARIN MONSALVE MARIA RUBIELA</td>
+      <td>CL 9  10 69 SOPETRAN</td>
+      <td>10000000.0</td>
+      <td>CASTAÑEDA RESTREPO LUIS FERNANDO</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Occidente</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>22227121</td>
+      <td>GAVIRIA GONZALEZ GLORIA CECILIA</td>
+      <td>ELECTRO ALEJO</td>
+      <td>Antioquia</td>
+      <td>Yolombó</td>
+      <td>NaN</td>
+      <td>CL 21 19 10 YOLOMBO</td>
+      <td>6000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>M</td>
+      <td>Minera</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>24390127</td>
+      <td>GIRALDO MARIN ISABEL CRISTINA</td>
+      <td>GIRALDO MARIN ISABEL CRISTINA(P))</td>
+      <td>Antioquia</td>
+      <td>Urrao</td>
+      <td>NaN</td>
+      <td>CL 30 30 14</td>
+      <td>10000001.0</td>
+      <td>MEJIA GARRO EDWIN ANDRES</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>B</td>
+      <td>Suroeste</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>24717111</td>
+      <td>CHARRY AGUIRRE IVONNE MARITZA</td>
+      <td>FERREAGRO CHARRY</td>
+      <td>Caldas</td>
+      <td>La Dorada</td>
+      <td>NaN</td>
+      <td>CALLE 16 3 33</td>
+      <td>3000000.0</td>
+      <td>BALLONA RIOS CARLOS ENRIQUE</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Eje cafetero</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>31976562</td>
+      <td>SERNA TORO SANDRA MARIA</td>
+      <td>S Y S FERRETERIA SOLUCIONES Y SERVICIOS</td>
+      <td>Antioquia</td>
+      <td>Itagüí</td>
+      <td>NaN</td>
+      <td>CL 36 66B 98</td>
+      <td>5000001.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>X</td>
+      <td>M</td>
+      <td>Sur</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>32140959</td>
+      <td>CEBALLOS GALEANO GLADYS ERLENY</td>
+      <td>FERRETERIA JPD</td>
+      <td>Antioquia</td>
+      <td>Bello</td>
+      <td>NaN</td>
+      <td>CL 31 43 C 12</td>
+      <td>10000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Norte</td>
+      <td>CRECIMIENTO</td>
+    </tr>
+    <tr>
+      <td>32207432</td>
+      <td>GALEANO ARCILA NORMAIRA</td>
+      <td>DEPOSITO LA TERMINAL</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Willian</td>
+      <td>CL 56 EE 17B 09</td>
+      <td>5000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>C</td>
+      <td>Centro</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>32259861</td>
+      <td>RESTREPO PANIAGUA MARITZA</td>
+      <td>FERRETERIA LA INA</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Jorge Bran</td>
+      <td>CL 49 94 45</td>
+      <td>0.0</td>
+      <td>CALL CENTER</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Call center</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>32328598</td>
+      <td>URIBE JARAMILLO LUZ AMPARO</td>
+      <td>DEP DE MAT CONST MARCO T URIBE</td>
+      <td>Antioquia</td>
+      <td>Envigado</td>
+      <td>NaN</td>
+      <td>CR 39 36 SUR 34</td>
+      <td>1000000.0</td>
+      <td>GOMEZ RIOS JHON FREDY</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Sur</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>3340486</td>
+      <td>SANCHEZ MUNOZ LUIS CARLOS</td>
+      <td>DEPOSITO Y FERRETERIA SANCHEZ</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>Carlos</td>
+      <td>CL  39  107 58</td>
+      <td>13000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Centro</td>
+      <td>MADUREZ</td>
+    </tr>
+    <tr>
+      <td>3380888</td>
+      <td>ARDILA VELEZ OSCAR MAURICIO</td>
+      <td>FERRE ELECTRICOS MAURO</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>NaN</td>
+      <td>CR 68 94 02</td>
+      <td>5000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Centro</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>3440661</td>
+      <td>FONNEGRA CORTES LUIS EDUARDO</td>
+      <td>ANFOLUJOS Y ACCESORIOS</td>
+      <td>Antioquia</td>
+      <td>Barbosa</td>
+      <td>luz</td>
+      <td>CR 17 20 33</td>
+      <td>8000000.0</td>
+      <td>LOPEZ  MARIA CRISTINA</td>
+      <td>ANTIGUO</td>
+      <td>B</td>
+      <td>M</td>
+      <td>Norte</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+    <tr>
+      <td>34564534</td>
+      <td>OSORIO MARQUEZ ERIKA MARIA</td>
+      <td>OSORIO MARQUEZ ERIKA MARIA(P))</td>
+      <td>Antioquia</td>
+      <td>Medellín</td>
+      <td>elkin</td>
+      <td>KM 7 ANTIGUA VIA GUARNE</td>
+      <td>16000000.0</td>
+      <td>CALL CENTER</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Call center</td>
+      <td>DECLIVE</td>
+    </tr>
+    <tr>
+      <td>71783739</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO(P))</td>
+      <td>Antioquia</td>
+      <td>Bello</td>
+      <td>NaN</td>
+      <td>C 37  45  200 AP 3003</td>
+      <td>100000.0</td>
+      <td>QUIROZ CASTRO LUIS ALEJANDRO</td>
+      <td>ANTIGUO</td>
+      <td>C</td>
+      <td>M</td>
+      <td>Norte</td>
+      <td>OPORTUNIDAD</td>
+    </tr>
+  </tbody>
+</table>
+<p style='margin-top:40px;font-size:12px;color:#888;'>Fuente: MallaClientes.xlsx | Generado automáticamente</p>
+</body>
+</html>

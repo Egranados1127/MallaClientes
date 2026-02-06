@@ -1,2 +1,4 @@
-# Requerimientos del backend
-# ...código existente...
+fastapi
+uvicorn
+pandas
+openpyxl

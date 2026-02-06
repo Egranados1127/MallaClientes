@@ -1,2 +1,97 @@
-<!-- Malla clientes profesional -->
-<!-- ...código existente... -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla de Segmentación de Clientes</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #2a4d7a; }
+    .kpis { background: #f0f4fa; padding: 10px 20px; margin-bottom: 20px; border-radius: 8px; }
+    .tabla-clientes { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    .tabla-clientes th, .tabla-clientes td { border: 1px solid #ccc; padding: 8px 12px; }
+    .tabla-clientes th { background: #e3eaf6; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    .filtros { margin: 20px 0; }
+    .objetivos { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Malla de Segmentación de Clientes</h1>
+  <div class="objetivos">
+    <b>Objetivos del proyecto:</b>
+    <ul>
+      <li>Segmentar clientes según importancia y ubicación.</li>
+      <li>Visualizar clusters y cartera.</li>
+      <li>Permitir análisis y toma de decisiones.</li>
+    </ul>
+  </div>
+  <div class="kpis">
+    <b>Total clientes:</b> 3<br>
+    <b>Alta-Alta:</b> 1<br>
+    <b>Media-Alta:</b> 1<br>
+    <b>Baja-Media:</b> 1
+  </div>
+  <div class="filtros">
+    <b>Filtros (simulados):</b> Por cluster, cartera, ciudad, vendedor...
+  </div>
+  <table class="tabla-clientes">
+    <thead>
+      <tr>
+        <th>NIT</th>
+        <th>Nombre Comercial</th>
+        <th>Rutero</th>
+        <th>Cupo</th>
+        <th>Clasificación</th>
+        <th>Calificación Cartera</th>
+        <th>Score Importancia</th>
+        <th>Score Ubicación</th>
+        <th>Cluster 3x3</th>
+        <th>Ciudad</th>
+        <th>Vendedor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>900123456</td>
+        <td>Cliente Ejemplo S.A.S.</td>
+        <td>Centro</td>
+        <td>20000000</td>
+        <td>MADUREZ</td>
+        <td>BUENA</td>
+        <td>92.5</td>
+        <td>90</td>
+        <td>Alta-Alta</td>
+        <td>Medellín</td>
+        <td>Juan Pérez</td>
+      </tr>
+      <tr>
+        <td>800654321</td>
+        <td>Distribuciones XYZ</td>
+        <td>Sur</td>
+        <td>15000000</td>
+        <td>OPORTUNIDAD</td>
+        <td>REGULAR</td>
+        <td>78.2</td>
+        <td>100</td>
+        <td>Media-Alta</td>
+        <td>Bogotá</td>
+        <td>Ana Gómez</td>
+      </tr>
+      <tr>
+        <td>901112233</td>
+        <td>Comercializadora ABC</td>
+        <td>Oriente</td>
+        <td>8000000</td>
+        <td>DECLIVE</td>
+        <td>RIESGO</td>
+        <td>54.7</td>
+        <td>80</td>
+        <td>Baja-Media</td>
+        <td>Cali</td>
+        <td>Carlos Ruiz</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style='margin-top:40px;font-size:12px;color:#888;'>Fuente: MallaClientes.xlsx | Generado automáticamente</p>
+</body>
+</html>

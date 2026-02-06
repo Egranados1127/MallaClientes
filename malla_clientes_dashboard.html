@@ -1,2 +1,573 @@
-<!-- Dashboard de clientes -->
-<!-- ...código existente... -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla de Segmentación de Clientes - Dashboard Profesional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="clientes_dashboard.js"></script>
+  <style>
+    body { background: linear-gradient(120deg, #e0e7ef 0%, #f8fafc 100%); }
+    .dashboard-header { background: linear-gradient(90deg, #2a4d7a 60%, #4e8cff 100%); color: #fff; padding: 40px 0 24px 0; text-align: center; box-shadow: 0 4px 16px #0002; }
+    .dashboard-header h1 { font-size: 2.8rem; font-weight: bold; letter-spacing: 1px; }
+    .dashboard-header .lead { font-size: 1.3rem; margin-bottom: 0; }
+    .kpi-card { border-radius: 16px; box-shadow: 0 2px 12px #0001; border: none; transition: transform 0.2s; }
+    .kpi-card:hover { transform: scale(1.04); box-shadow: 0 4px 24px #0002; }
+    .kpi-card .card-title { font-size: 1.1rem; }
+    .kpi-card .display-6 { font-size: 2.1rem; }
+    .kpi-card .icon-segment { font-size: 2.2rem; margin-bottom: 0.2em; }
+    .table-responsive { background: #fff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 18px; }
+    .filtros { margin: 28px 0 16px 0; }
+    .logo { height: 70px; margin-bottom: 12px; filter: drop-shadow(0 2px 8px #0003); }
+    .chart-container { background: #fff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 18px; margin-bottom: 28px; }
+    .resumen-ejecutivo { background: #fff; border-radius: 14px; box-shadow: 0 2px 12px #0001; padding: 24px 32px; margin-bottom: 32px; }
+    .resumen-ejecutivo h3 { color: #2a4d7a; font-weight: bold; }
+    .beneficios-card { background: #eaf3ff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 18px; margin-bottom: 18px; }
+    .beneficios-card h4 { color: #0d6efd; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-header">
+    <img src="https://je.com.co/wp-content/uploads/2022/09/logo-JE.png" class="logo" alt="J&E Logo" />
+    <h1>Malla de Segmentación de Clientes</h1>
+    <p class="lead">Dashboard profesional para análisis, segmentación y toma de decisiones</p>
+  </div>
+  <div class="container mt-4 mb-4">
+    <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="intro-tab" data-bs-toggle="tab" data-bs-target="#intro" type="button" role="tab">Introducción</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="detalle-tab" data-bs-toggle="tab" data-bs-target="#detalle" type="button" role="tab">Detalle y Segmentación</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="oferta-tab" data-bs-toggle="tab" data-bs-target="#oferta" type="button" role="tab">Oferta de Servicio</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="dashboardTabsContent">
+      <div class="tab-pane fade show active" id="intro" role="tabpanel">
+        <div class="resumen-ejecutivo px-4 py-5" style="background:linear-gradient(120deg,#f8fafc 60%,#eaf3ff 100%);box-shadow:0 4px 24px #0001;">
+          <div class="row mb-5 align-items-center">
+            <div class="col-lg-3 text-center mb-3 mb-lg-0">
+              <div style="font-size:4rem;color:#0d6efd;"><i class="bi bi-bullseye"></i></div>
+            </div>
+            <div class="col-lg-9">
+              <h2 class="mb-3" style="color:#0d6efd;font-weight:700;letter-spacing:1px;">Objetivo del Proyecto</h2>
+              <p class="fs-5 mb-0" style="color:#222;">Clasificar y segmentar a todos los clientes de la compañía según su importancia estratégica, ubicación y comportamiento de cartera, para ofrecer propuestas de valor diferenciadas y optimizar la gestión comercial y de riesgo.</p>
+            </div>
+          </div>
+          <div class="row g-4 mb-5">
+            <div class="col-md-6">
+              <div class="card shadow-lg border-0 h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                  <div class="mb-3" style="font-size:2.5rem;color:#198754;"><i class="bi bi-bar-chart-line"></i></div>
+                  <h4 class="mb-3" style="color:#198754;font-weight:600;">¿Qué ganamos?</h4>
+                  <ul class="fs-5 mb-0" style="color:#222;">
+                    <li>Priorización de clientes clave para maximizar ventas y rentabilidad.</li>
+                    <li>Mejor gestión del riesgo de cartera y cobranza.</li>
+                    <li>Ofertas y servicios personalizados según el perfil y potencial del cliente.</li>
+                    <li>Visibilidad clara para la toma de decisiones estratégicas.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card shadow-lg border-0 h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                  <div class="mb-3" style="font-size:2.5rem;color:#ffc107;"><i class="bi bi-diagram-3"></i></div>
+                  <h4 class="mb-3" style="color:#ffc107;font-weight:600;">Lógica y Malla de Calificación</h4>
+                  <p class="fs-5 mb-3" style="color:#222;">La segmentación se realiza con base en una malla de calificación que considera variables como: cupo, cartera, clasificación de riesgo, ubicación, edad de cartera y cluster estratégico. Cada cliente es evaluado y asignado a un segmento según la siguiente malla:</p>
+                  <div class="row mb-3 w-100">
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                      <canvas id="pesosMallaChart" width="180" height="180"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                      <table class="table table-bordered table-sm text-center mb-0">
+                        <thead class="table-light">
+                          <tr><th>Variable</th><th>Peso (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>Calificación Cartera</td><td>40%</td></tr>
+                          <tr><td>Clasificación ABC</td><td>30%</td></tr>
+                          <tr><td>Ciudad principal</td><td>20%</td></tr>
+                          <tr><td>Cupo</td><td>10%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="table-responsive w-100">
+                    <table class="table table-bordered table-sm align-middle text-center mb-0">
+                      <thead class="table-light">
+                        <tr><th>Segmento</th><th>Descripción</th><th>Criterios</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><span class="icon-segment" style="color:#198754;">&#9733;</span> Premium</td><td>Clientes de alto valor y bajo riesgo</td><td>Cupo &gt; $10M<br>Calificación Cartera: A<br>Clasificación ABC: A<br>Ciudad principal: <b>Valle de Aburrá</b> (Medellín, Bello, Itagüí, Envigado, Sabaneta, La Estrella, Copacabana, Girardota, Barbosa, Caldas)</td></tr>
+                        <tr><td><span class="icon-segment" style="color:#0d6efd;">&#9733;</span> Potencial</td><td>Clientes con potencial de crecimiento</td><td>Cupo &gt; $3M<br>Calificación Cartera: A o B<br>Clasificación ABC: A o B</td></tr>
+                        <tr><td><span class="icon-segment" style="color:#ffc107;">&#9888;</span> Riesgo</td><td>Clientes con cartera vencida o alto riesgo</td><td>Calificación Cartera: C o M<br>Clasificación ABC: C</td></tr>
+                        <tr><td><span class="icon-segment" style="color:#6c757d;">&#9675;</span> Otros</td><td>Clientes con baja actividad o información incompleta</td><td>No cumplen criterios anteriores</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="mb-0 mt-3 fs-6" style="color:#555;"><b>Nota:</b> La lógica de segmentación puede ajustarse según las necesidades del negocio y los resultados de la analítica. Los nuevos pesos son: Cartera 40%, ABC 30%, Ciudad principal 20%, Cupo 10%.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="detalle" role="tabpanel">
+        <div class="container mt-4">
+          <div class="row mb-4">
+            <div class="col-md-2">
+              <div class="card kpi-card text-center border-primary">
+                <div class="card-body">
+                  <div class="icon-segment" style="color:#2a4d7a;">&#128202;</div>
+                  <h5 class="card-title">Total Clientes</h5>
+                  <p class="display-6 fw-bold" id="kpi-total">-</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card kpi-card text-center border-success">
+                <div class="card-body">
+                  <div class="icon-segment" style="color:#198754;">&#9733;</div>
+                  <h5 class="card-title">Premium</h5>
+                  <p class="display-6 fw-bold text-success" id="kpi-premium">-</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card kpi-card text-center border-info">
+                <div class="card-body">
+                  <div class="icon-segment" style="color:#0d6efd;">&#9733;</div>
+                  <h5 class="card-title">Potencial</h5>
+                  <p class="display-6 fw-bold text-info" id="kpi-potencial">-</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card kpi-card text-center border-warning">
+                <div class="card-body">
+                  <div class="icon-segment" style="color:#ffc107;">&#9888;</div>
+                  <h5 class="card-title">Riesgo</h5>
+                  <p class="display-6 fw-bold text-warning" id="kpi-riesgo">-</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card kpi-card text-center border-secondary">
+                <div class="card-body">
+                  <div class="icon-segment" style="color:#6c757d;">&#9675;</div>
+                  <h5 class="card-title">Otros</h5>
+                  <p class="display-6 fw-bold text-secondary" id="kpi-otros">-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row mb-4">
+              <div class="col-md-12">
+                <div class="card kpi-card text-center border-0" style="background:#f8fafc;">
+                  <div class="card-body p-3">
+                    <div class="row">
+                      <div class="col-md-3"><span class="fw-bold" style="color:#198754;">Premium</span><br><span id="avg-premium" class="fs-5">-</span></div>
+                      <div class="col-md-3"><span class="fw-bold" style="color:#0d6efd;">Potencial</span><br><span id="avg-potencial" class="fs-5">-</span></div>
+                      <div class="col-md-3"><span class="fw-bold" style="color:#ffc107;">Riesgo</span><br><span id="avg-riesgo" class="fs-5">-</span></div>
+                      <div class="col-md-3"><span class="fw-bold" style="color:#6c757d;">Otros</span><br><span id="avg-otros" class="fs-5">-</span></div>
+                    </div>
+                    <div class="mt-2 small text-muted">Calificación promedio por segmento</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="row mb-4">
+            <div class="col-md-6 chart-container">
+              <h5 class="text-center">Top 10 Clientes por Calificación</h5>
+              <ol class="list-group list-group-numbered" id="top-clientes-list"></ol>
+            </div>
+            <div class="col-md-6 chart-container">
+              <h5 class="text-center">Cartera por Estado</h5>
+              <canvas id="carteraChart"></canvas>
+            </div>
+          </div>
+          <div class="filtros">
+            <div class="row g-2">
+              <div class="col-md-6">
+                <select class="form-select" id="filtro-segmento">
+                  <option value="">Filtrar por Segmento</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" id="filtro-clasificacion">
+                  <option value="">Filtrar por Clasificación</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive mt-4">
+            <div style="overflow:auto; max-height:500px;">
+              <table class="table table-striped align-middle" id="tabla-clientes" style="min-width:1200px; border-collapse: separate; border-spacing: 0;">
+                <thead class="table-primary" id="thead-clientes" style="position:sticky;top:0;z-index:3;"></thead>
+                <tbody id="tbody-clientes"></tbody>
+              </table>
+            </div>
+            <style>
+              #tabla-clientes th, #tabla-clientes td {
+                white-space: nowrap;
+              }
+              #tabla-clientes thead th {
+                position: sticky;
+                top: 0;
+                background: #eaf3ff;
+                z-index: 3;
+              }
+              #tabla-clientes th.sticky-col, #tabla-clientes td.sticky-col {
+                position: sticky;
+                left: 0;
+                background: #f8fafc;
+                z-index: 2;
+                min-width: 140px;
+                max-width: 180px;
+              }
+              #tabla-clientes th.sticky-col-2, #tabla-clientes td.sticky-col-2 {
+                position: sticky;
+                left: 150px;
+                background: #f8fafc;
+                z-index: 2;
+                min-width: 140px;
+                max-width: 180px;
+              }
+              #tabla-clientes th.sticky-col-3, #tabla-clientes td.sticky-col-3 {
+                position: sticky;
+                left: 300px;
+                background: #f8fafc;
+                z-index: 2;
+                min-width: 140px;
+                max-width: 180px;
+              }
+            </style>
+          </div>
+          <footer class="text-center mt-5 mb-2 text-muted">
+            Fuente: MallaClientes.xlsx | Presentación generada automáticamente
+          </footer>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="oferta" role="tabpanel">
+        <div class="container mt-4">
+          <div class="card shadow-lg border-0 px-4 py-5 mb-5">
+            <div class="d-flex align-items-center mb-4">
+              <div style="font-size:2.5rem;color:#198754;" class="me-3"><i class="bi bi-bar-chart-steps"></i></div>
+              <h2 class="mb-0" style="color:#198754;font-weight:700;letter-spacing:1px;">Beneficios y Resultados Esperados</h2>
+            </div>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body">
+                    <h5 class="mb-2" style="color:#0d6efd;"><i class="bi bi-person-badge"></i> Para el Cliente</h5>
+                    <ul class="fs-6 mb-0">
+                      <li>Pedido 24/7, sin filas ni llamadas.</li>
+                      <li>Historial en línea y mejor tiempo de despacho.</li>
+                      <li>Etiqueta de “Cliente Autogestionable Certificado”.</li>
+                      <li>Beneficios exclusivos y atención personalizada.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body">
+                    <h5 class="mb-2" style="color:#198754;"><i class="bi bi-bar-chart-line"></i> Para la Empresa</h5>
+                    <ul class="fs-6 mb-0">
+                      <li>Menos fricción operativa y mayor adopción.</li>
+                      <li>Liberación de tiempo para el equipo comercial.</li>
+                      <li>KPI claros: % de clientes autogestionables, recuperación de clientes sin ventas, errores por pedido, satisfacción del cliente.</li>
+                      <li>Mejora continua basada en datos y feedback.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow-lg border-0 px-4 py-5">
+            <div class="d-flex align-items-center mb-4">
+              <div style="font-size:3rem;color:#0d6efd;" class="me-3"><i class="bi bi-gift"></i></div>
+              <h2 class="mb-0" style="color:#0d6efd;font-weight:700;letter-spacing:1px;">Oferta de Servicio por Segmento</h2>
+            </div>
+            <div class="table-responsive mb-4">
+              <table class="table table-bordered table-sm align-middle text-center mb-0">
+                <thead class="table-light">
+                  <tr><th colspan="2" class="text-center fs-5">Premium</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="2"><b>Estrategia de negocio:</b> Autogestión como privilegio.<br><b>Acceso:</b> Pedido 24/7, historial en línea, despacho prioritario.<br><b>Vendedor:</b> Asesor estratégico.<br><b>Beneficios:</b> Certificación, catálogo completo, atención personalizada.</td></tr>
+                </tbody>
+                <thead class="table-light">
+                  <tr><th colspan="2" class="text-center fs-5">Potencial</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="2"><b>Estrategia de segmentación:</b> Onboarding guiado.<br><b>Acceso:</b> Mini tutorial, primer pedido acompañado.<br><b>Canal:</b> WhatsApp/call center activo.<br><b>Beneficios:</b> Incentivos para adopción y crecimiento.</td></tr>
+                </tbody>
+                <thead class="table-light">
+                  <tr><th colspan="2" class="text-center fs-5">Riesgo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="2"><b>Estrategia de recuperación:</b> Autogestión como herramienta de reactivación.<br><b>Acceso:</b> Catálogo reducido, validaciones automáticas.<br><b>Seguimiento:</b> Monitoreo especial, alertas.<br><b>Beneficios:</b> Campañas de reactivación.</td></tr>
+                </tbody>
+                <thead class="table-light">
+                  <tr><th colspan="2" class="text-center fs-5">Otros</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="2"><b>Estrategia:</b> Acceso limitado.<br><b>Acciones:</b> Campañas de reactivación, invitación personalizada.<br><b>Contacto:</b> Ocasional, según potencial.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="fs-5 mb-0" style="color:#222;">La oferta de servicio se adapta según el segmento, buscando maximizar el valor y la satisfacción del cliente, así como la eficiencia operativa y comercial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  </div>
+  <div class="container mt-4">
+    <!-- KPIs y gráficos solo en la vista de detalle -->
+  </div>
+  <script>
+    // Activar funcionalidad de tabs Bootstrap
+    document.addEventListener('DOMContentLoaded', function() {
+      var triggerTabList = [].slice.call(document.querySelectorAll('#dashboardTabs button'));
+      triggerTabList.forEach(function(triggerEl) {
+        var tabTrigger = new bootstrap.Tab(triggerEl);
+        triggerEl.addEventListener('click', function (event) {
+          event.preventDefault();
+          tabTrigger.show();
+        });
+      });
+    });
+  // Gráfico de dona para pesos de la malla de calificación
+  window.addEventListener('DOMContentLoaded', function() {
+    const ctxPesos = document.getElementById('pesosMallaChart').getContext('2d');
+    new Chart(ctxPesos, {
+      type: 'doughnut',
+      data: {
+        labels: ['Cartera', 'ABC', 'Ciudad principal', 'Cupo'],
+        datasets: [{
+          data: [40, 30, 20, 10],
+          backgroundColor: [
+            '#198754', // Cartera
+            '#0d6efd', // ABC
+            '#ffc107', // Ciudad
+            '#6c757d'  // Cupo
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { position: 'bottom' },
+          tooltip: { enabled: true }
+        },
+        cutout: '65%',
+        responsive: false
+      }
+    });
+  });
+    // Cargar datos desde un archivo JSON generado por Python
+    // Los datos reales se cargan automáticamente desde clientes_dashboard.js
+    // Si tienes un archivo clientes.json generado por Python, puedes cargarlo así:
+    // fetch('clientes.json').then(r=>r.json()).then(clientes=>{ ... })
+    // La variable 'clientes' ya está disponible globalmente
+
+    // --- Lógica visual profesional ---
+    function unique(arr) { return [...new Set(arr)]; }
+    function renderTable(data) {
+      const thead = document.getElementById('thead-clientes');
+      const tbody = document.getElementById('tbody-clientes');
+      if (!data.length) { thead.innerHTML = ''; tbody.innerHTML = '<tr><td colspan="20">Sin datos</td></tr>'; return; }
+      const cols = Object.keys(data[0]);
+      // Render encabezado con sticky para las 3 primeras columnas
+      thead.innerHTML = '<tr>' + cols.map((c,i)=>{
+        let cls = '';
+        if(i===0) cls='sticky-col';
+        if(i===1) cls='sticky-col-2';
+        if(i===2) cls='sticky-col-3';
+        return `<th class="${cls}">${c}</th>`;
+      }).join('') + '</tr>';
+      // Render filas con sticky para las 3 primeras columnas
+      tbody.innerHTML = data.map(row => '<tr>' + cols.map((c,i) => {
+        let cls = '';
+        if(i===0) cls='sticky-col';
+        if(i===1) cls='sticky-col-2';
+        if(i===2) cls='sticky-col-3';
+        return `<td class="${cls}">${row[c]}</td>`;
+      }).join('') + '</tr>').join('');
+    }
+    function renderFiltros(data) {
+      const segmentos = unique(data.map(c=>c['Segmento Estrategico']||''));
+      const clasificacion = unique(data.map(c=>c['Clasificación']||c['ClasificaciÓn']||''));
+      document.getElementById('filtro-segmento').innerHTML += segmentos.filter(Boolean).map(c=>`<option>${c}</option>`).join('');
+      document.getElementById('filtro-clasificacion').innerHTML += clasificacion.filter(Boolean).map(c=>`<option>${c}</option>`).join('');
+    }
+    function renderKPIs(data) {
+      document.getElementById('kpi-total').textContent = data.length;
+      const premium = data.filter(c=>c['Segmento Estrategico']==='Premium').length;
+      const potencial = data.filter(c=>c['Segmento Estrategico']==='Potencial').length;
+      const riesgo = data.filter(c=>c['Segmento Estrategico']==='Riesgo').length;
+      const otros = data.filter(c=>c['Segmento Estrategico']==='Otros').length;
+      document.getElementById('kpi-premium').textContent = premium;
+      document.getElementById('kpi-potencial').textContent = potencial;
+      document.getElementById('kpi-riesgo').textContent = riesgo;
+      document.getElementById('kpi-otros').textContent = otros;
+
+      // Calificación promedio por segmento
+      function avg(arr) {
+        if (!arr.length) return '-';
+        const vals = arr.map(x => parseFloat(x['Calificación Final'])).filter(x => !isNaN(x));
+        if (!vals.length) return '-';
+        return (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+      }
+      document.getElementById('avg-premium').textContent = avg(data.filter(c=>c['Segmento Estrategico']==='Premium'));
+      document.getElementById('avg-potencial').textContent = avg(data.filter(c=>c['Segmento Estrategico']==='Potencial'));
+      document.getElementById('avg-riesgo').textContent = avg(data.filter(c=>c['Segmento Estrategico']==='Riesgo'));
+      document.getElementById('avg-otros').textContent = avg(data.filter(c=>c['Segmento Estrategico']==='Otros'));
+    }
+    function renderCharts(data) {
+      // Top 10 clientes por calificación final
+      const topClientes = [...data]
+        .filter(c => typeof c['Calificación Final'] === 'number' || !isNaN(parseFloat(c['Calificación Final'])))
+        .sort((a, b) => parseFloat(b['Calificación Final']) - parseFloat(a['Calificación Final']))
+        .slice(0, 10);
+      const topList = document.getElementById('top-clientes-list');
+      if (topList) {
+        topList.innerHTML = topClientes.map(c => {
+          const nombreComercial = c['Nombre Comercial'] || c['NOMBRE COMERCIAL'] || c['nombre comercial'] || 'Cliente';
+          const score = c['Calificación Final'] || '';
+          return `<li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="fw-semibold">${nombreComercial}</span>
+            <span class="fw-bold">${score}</span>
+          </li>`;
+        }).join('');
+      }
+      // Gráfico de segmentos
+      const segmentoOrder = ['Premium', 'Potencial', 'Riesgo', 'Otros'];
+      const segmentoColors = {
+        'Premium': '#198754',
+        'Potencial': '#0d6efd',
+        'Riesgo': '#ffc107',
+        'Otros': '#6c757d'
+      };
+      const segmentos = segmentoOrder.reduce((acc, seg) => {
+        acc[seg] = data.filter(c => (c['Segmento Estrategico']||'') === seg).length;
+        return acc;
+      }, {});
+      const totalClientes = segmentoOrder.reduce((sum, seg) => sum + (segmentos[seg] || 0), 0);
+      new Chart(document.getElementById('carteraChart'), {
+        type: 'pie',
+        data: { 
+          labels: segmentoOrder.map(seg => {
+            const count = segmentos[seg] || 0;
+            const pct = totalClientes ? ((count / totalClientes) * 100).toFixed(1) : '0.0';
+            return `${seg} (${count} | ${pct}%)`;
+          }),
+          datasets: [{ 
+            data: segmentoOrder.map(seg => segmentos[seg]), 
+            backgroundColor: segmentoOrder.map(seg => segmentoColors[seg])
+          }] 
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom' },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const seg = segmentoOrder[context.dataIndex];
+                  const count = segmentos[seg] || 0;
+                  const pct = totalClientes ? ((count / totalClientes) * 100).toFixed(1) : '0.0';
+                  return `${seg}: ${count} clientes (${pct}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    function aplicarFiltros() {
+      let data = clientes;
+      const seg = document.getElementById('filtro-segmento').value;
+      const cl = document.getElementById('filtro-clasificacion').value;
+      if (seg) data = data.filter(c=> (c['Segmento Estrategico']||'') === seg);
+      if (cl) data = data.filter(c=> (c['Clasificación']||c['ClasificaciÓn']||'') === cl);
+      renderTable(data);
+    }
+    // Inicialización
+    document.getElementById('detalle-tab').addEventListener('click', function() {
+      renderTable(clientes);
+      renderFiltros(clientes);
+      renderKPIs(clientes);
+      renderCharts(clientes);
+      document.getElementById('filtro-segmento').onchange = aplicarFiltros;
+      document.getElementById('filtro-clasificacion').onchange = aplicarFiltros;
+    });
+  </script>
+  <!--
+    Para usar datos reales, reemplaza la variable 'clientes' por el array generado por tu script Python.
+    Ejemplo: const clientes = [...];
+    O usa fetch para cargar un archivo clientes.json generado por Python.
+  -->
+</body>
+</div>
+<!-- Tabla de métricas de calificación al final -->
+<div class="container mb-5">
+  <div class="beneficios-card mt-5">
+    <h4 class="mb-3">Métrica de Calificación por Segmento</h4>
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm align-middle text-center mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Segmento</th>
+            <th>Descripción</th>
+            <th>Criterios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="icon-segment" style="color:#198754;">&#9733;</span> Premium</td>
+            <td>Clientes de alto valor y bajo riesgo</td>
+            <td>
+              Cupo &gt; $10M<br>
+              Calificación Cartera: A<br>
+              Clasificación ABC: A<br>
+              Ciudad principal: <b>Valle de Aburrá</b> (Medellín, Bello, Itagüí, Envigado, Sabaneta, La Estrella, Copacabana, Girardota, Barbosa, Caldas)
+            </td>
+          </tr>
+          <tr>
+            <td><span class="icon-segment" style="color:#0d6efd;">&#9733;</span> Potencial</td>
+            <td>Clientes con potencial de crecimiento</td>
+            <td>
+              Cupo &gt; $3M<br>
+              Calificación Cartera: A o B<br>
+              Clasificación ABC: A o B
+            </td>
+          </tr>
+          <tr>
+            <td><span class="icon-segment" style="color:#ffc107;">&#9888;</span> Riesgo</td>
+            <td>Clientes con cartera vencida o alto riesgo</td>
+            <td>
+              Calificación Cartera: C o M<br>
+              Clasificación ABC: C
+            </td>
+          </tr>
+          <tr>
+            <td><span class="icon-segment" style="color:#6c757d;">&#9675;</span> Otros</td>
+            <td>Clientes con baja actividad o información incompleta</td>
+            <td>
+              No cumplen criterios anteriores
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-2 mb-0"><b>Nota:</b> Cada cliente es evaluado y asignado a un segmento según estos criterios, incluyendo la clasificación ABC.</p>
+  </div>
+</div>
+</html>
